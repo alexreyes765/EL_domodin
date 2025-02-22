@@ -23,6 +23,7 @@ $stmt = $carController->readCars();
         <h1>El Domodin de Carros</h1>
         <div class="navegacion btn btn-success">
             <a href="Views/add.php" style="color: white; text-decoration: none;">Agregar un Carro</a>
+            <a href="#" style="color: white; text-decoration: none;">Edita carro</a>
         </div>
     </nav>
     <div class="container">
