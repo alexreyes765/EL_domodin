@@ -40,6 +40,11 @@ $stmt = $carController->readCars();
             <div class="description">
                 <p>clima heladote, era de una maestra, sale a carretera sin problemas</p>
             </div>
+        <div class="text-center mt-3">
+            <button class="btn btn-primary">Obtener más información</button>
+        </div>
+    
+
         </div>
 
         <div class="shadow-5 p-3">
