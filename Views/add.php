@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario para Agregar Carro</title>
     <style>
-        /* Estilos del formulario */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -83,19 +82,8 @@
                 <input type="text" id="descripcion" name="descripcion" required>
             </div>
 
-            <div class="form-group">
-                <label for="id_comprador">ID Comprador:</label>
-                <input type="number" id="id_comprador" name="id_comprador">
-            </div>
-
-            <div class="form-group">
-                <label for="id_vendedor">ID Vendedor:</label>
-                <input type="number" id="id_vendedor" name="id_vendedor" required>
-            </div>
-
             <input type="submit" value="Agregar Carro">
         </form>
     </div>
 </body>
 </html>
-

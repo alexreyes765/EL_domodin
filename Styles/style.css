@@ -3,23 +3,22 @@
     width: 50%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background-color: aqua;
     margin: 0 auto;
+    gap: 45px;
 }
 
 .card{
-    width: 250px;
+    width: 300px;
     border: 1px solid black;
-    padding: 5px;
 }
 
 .card h2{
     text-align: center;
 }
 
-.card img{
-    width: 180px;
-
+figure .img {
+    width: 400px;
+    text-align: center;
 }
 
 nav{

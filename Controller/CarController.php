@@ -1,5 +1,5 @@
 <?php
-require_once '../Model/Car.php';
+require_once 'Model/Car.php';
 
 class CarController {
 
