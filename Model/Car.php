@@ -10,7 +10,7 @@ class Car {
     public $kilometraje;
     public $precio;
     public $descripcion;
-    public $id_comprador = null;  // Inicializado en null
+    public $id_comprador = null;
     public $id_vendedor;
 
     public function __construct($db) {
@@ -75,5 +75,44 @@ class Car {
 
         return false;
     }
+
+    public function update() {
+        $query = "UPDATE " . $this->table_name . " SET 
+            marca = :marca,
+            modelo = :modelo,
+            tipo = :tipo,
+            kilometraje = :kilometraje,
+            precio = :precio,
+            descripcion = :descripcion,
+            id_comprador = :id_comprador
+            WHERE id_carro = :id_carro AND id_vendedor = :id_vendedor";
+    
+        $stmt = $this->conn->prepare($query);
+    
+        // Sanitización de datos
+        $this->id_carro = htmlspecialchars(strip_tags($this->id_carro));
+        $this->modelo = htmlspecialchars(strip_tags($this->modelo));
+        $this->marca = htmlspecialchars(strip_tags($this->marca));
+        $this->tipo = htmlspecialchars(strip_tags($this->tipo));
+        $this->kilometraje = htmlspecialchars(strip_tags($this->kilometraje));
+        $this->precio = htmlspecialchars(strip_tags($this->precio));
+        $this->descripcion = htmlspecialchars(strip_tags($this->descripcion));
+        $this->id_vendedor = htmlspecialchars(strip_tags($this->id_vendedor));
+        $this->id_comprador = htmlspecialchars(strip_tags($this->id_comprador));
+    
+        // Vinculación de parámetros
+        $stmt->bindParam(":id_carro", $this->id_carro);
+        $stmt->bindParam(":modelo", $this->modelo);
+        $stmt->bindParam(":marca", $this->marca);
+        $stmt->bindParam(":tipo", $this->tipo);
+        $stmt->bindParam(":kilometraje", $this->kilometraje);
+        $stmt->bindParam(":precio", $this->precio);
+        $stmt->bindParam(":descripcion", $this->descripcion);
+        $stmt->bindParam(":id_comprador", $this->id_comprador);
+        $stmt->bindParam(":id_vendedor", $this->id_vendedor); // Se asegura que el vendedor sea el mismo
+    
+        return $stmt->execute();
+    }
+    
 }
 ?>
