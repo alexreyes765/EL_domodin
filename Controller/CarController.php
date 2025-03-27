@@ -1,24 +1,17 @@
 <?php
-require_once 'Model/Car.php';
+require_once __DIR__ . '/../Model/CarFactory.php';
 
 class CarController {
-
-    private $car;
+    private $db;
 
     public function __construct($db) {
-        $this->car = new Car($db);
+        $this->db = $db;
     }
 
     public function createCar($modelo, $marca, $tipo, $kilometraje, $precio, $descripcion, $id_vendedor) {
-        $this->car->modelo = $modelo;
-        $this->car->marca = $marca;
-        $this->car->tipo = $tipo;
-        $this->car->kilometraje = $kilometraje;
-        $this->car->precio = $precio;
-        $this->car->descripcion = $descripcion;
-        $this->car->id_vendedor = $id_vendedor;
+        $car = CarFactory::createCar($this->db, $modelo, $marca, $tipo, $kilometraje, $precio, $descripcion, $id_vendedor);
 
-        if ($this->car->create()) {
+        if ($car->create()) {
             echo "Car created successfully!";
         } else {
             echo "Unable to create car.";
@@ -26,26 +19,21 @@ class CarController {
     }
 
     public function readCars() {
-        return $this->car->read();
+        $car = new Car($this->db);
+        return $car->read();
     }
 
     public function readCar($id_carro) {
-        $this->car->id_carro = $id_carro;
-        $this->car->readOne();
+        $car = new Car($this->db);
+        $car->id_carro = $id_carro;
+        return $car->readOne();
     }
 
     public function updateCar($id_carro, $modelo, $marca, $tipo, $kilometraje, $precio, $descripcion, $id_vendedor, $id_comprador = null) {
-        $this->car->id_carro = $id_carro;
-        $this->car->modelo = $modelo;
-        $this->car->marca = $marca;
-        $this->car->tipo = $tipo;
-        $this->car->kilometraje = $kilometraje;
-        $this->car->precio = $precio;
-        $this->car->descripcion = $descripcion;
-        $this->car->id_vendedor = $id_vendedor;
-        $this->car->id_comprador = $id_comprador;  // Si hay comprador, se actualiza, si no, queda como null
+        $car = CarFactory::createCar($this->db, $modelo, $marca, $tipo, $kilometraje, $precio, $descripcion, $id_vendedor, $id_comprador);
+        $car->id_carro = $id_carro;
 
-        if ($this->car->update()) {
+        if ($car->update()) {
             echo "Car updated successfully!";
         } else {
             echo "Unable to update car.";
@@ -53,9 +41,10 @@ class CarController {
     }
 
     public function deleteCar($id_carro) {
-        $this->car->id_carro = $id_carro;
+        $car = new Car($this->db);
+        $car->id_carro = $id_carro;
 
-        if ($this->car->delete()) {
+        if ($car->delete()) {
             echo "Car deleted successfully!";
         } else {
             echo "Unable to delete car.";
